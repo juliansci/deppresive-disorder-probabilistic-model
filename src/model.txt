@@ -1,0 +1,76 @@
+/**
+    Sintomas, indicar con 0 si no presenta ese sintoma con 1 en caso de que si y 0.5 si no sabe
+*/
+0.5::perdidaApetito.
+0.5::perdidaEnergia.
+0.5::dificultadDeConcentracion.
+0.5::sensacionCulpa.
+0.5::problemaConAlcohol.
+0.5::cambiosEnEstadoAnimo.
+0.5::pensamientoSobreMuerte.
+0.5::perdidadDePlacer.
+0.5::dificultaParaDormir.
+0.5::sencacionDeTristeza.
+
+/**
+    Sintomas inducidos.
+*/
+0.8::perdidaEnergia :- perdidaApetito.
+0.8::dificultadDeConcentracion:- perdidaEnergia.
+0.7::problemaConAlcohol:- dificultadDeConcentracion.
+
+
+/**
+    Enfermedades.
+*/
+
+/**
+    Transtorno Depresivo Mayor.
+*/
+
+0.9::transtornoDepresivoMayor :- perdidaApetito, perdidaEnergia, dificultadDeConcentracion,  sensacionCulpa, pensamientoSobreMuerte, perdidadDePlacer, dificultaParaDormir.
+
+0.65::transtornoDepresivoMayor :- perdidaApetito, perdidaEnergia, pensamientoSobreMuerte, perdidadDePlacer.
+
+0.2::transtornoDepresivoMayor :- perdidaApetito, perdidaEnergia, perdidadDePlacer.
+
+/**
+    Transtorno Distimico.
+*/
+
+0.9::transtornoDistimico :- perdidaApetito, perdidaEnergia, dificultadDeConcentracion,  sensacionCulpa, pensamientoSobreMuerte, dificultaParaDormir, sencacionDeTristeza.
+
+0.7::transtornoDistimico :- perdidaApetito, perdidaEnergia, dificultadDeConcentracion,  sensacionCulpa, sencacionDeTristeza.
+
+/**
+    Transtorno Por Sustancias.
+*/
+
+0.7::transtornoPorSustancias :- perdidaApetito, perdidaEnergia, dificultadDeConcentracion,  sensacionCulpa, problemaConAlcohol, cambiosEnEstadoAnimo, pensamientoSobreMuerte, perdidadDePlacer.
+
+0.2::transtornoPorSustancias :- problemaConAlcohol, pensamientoSobreMuerte, perdidadDePlacer.
+
+/**
+    Transtorno Bipolar.
+*/
+
+0.9::transtornoBipolar :- perdidaApetito, perdidaEnergia, dificultadDeConcentracion,  sensacionCulpa, problemaConAlcohol, cambiosEnEstadoAnimo, pensamientoSobreMuerte, perdidadDePlacer, dificultaParaDormir.
+
+0.75::transtornoBipolar :- perdidaApetito, dificultadDeConcentracion, cambiosEnEstadoAnimo, pensamientoSobreMuerte, perdidadDePlacer, dificultaParaDormir.
+
+0.35::transtornoBipolar :- dificultadDeConcentracion, cambiosEnEstadoAnimo, pensamientoSobreMuerte.
+
+/**
+    Transtorno Ciclotimico.
+*/
+
+0.6::transtornoCiclotimico :- dificultadDeConcentracion,  sensacionCulpa, perdidadDePlacer, sencacionDeTristeza.
+
+0.15::transtornoCiclotimico :- sencacionDeTristeza.
+
+
+query(transtornoDepresivoMayor).
+query(transtornoDistimico).
+query(transtornoPorSustancias).
+query(transtornoBipolar).
+query(transtornoCiclotimico).
